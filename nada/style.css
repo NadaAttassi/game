@@ -1,0 +1,79 @@
+#lelabel {
+    background-color: #A52A2A; /* Marron */
+    color: #ffffff; /* Blanc */
+    font-family:"Press Start 2P";
+    padding: 10px; /* Ajoutez un espace intérieur au label */
+    border-radius: 5px; /* Ajoutez des coins arrondis au label */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Ajoutez une ombre avec un léger flou */
+
+}
+#f1{
+    background-image: url('Wall.jpg');
+    
+}
+#f2 {
+    background-image: url('temple.jpg');
+    
+}
+
+#nom{
+	
+    color: #000000; /* Blanc */
+    font-family:"Press Start 2P";
+}
+#lbl {
+    font-family: "Press Start 2P";
+    font-size: 30px; /* Taille de police de 36 pixels */
+    color: #FDF5E6; /* Blanc */
+
+}
+#remaining-points-label {
+    color: #000000; /* Blanc */
+    font-family:"Press Start 2P";
+}
+
+/* styles.css */
+
+/* Style pour les boutons de miniature */
+#thumbnail-button {
+    background-color: #3498db; /* Couleur de fond */
+    color: #000000; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    padding: 5px 10px; /* Espacement intérieur */
+    font-size: 12px; /* Taille de la police */
+}
+#container{
+	margin-left:200px;
+}
+/* dialog_style.css */
+#dialog {
+    background-color: #2E3440;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#dialog entry {
+    background-color: #3B4252;
+    color: #D8DEE9;
+    border: 1px solid #4C566A;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#dialog button {
+    background-color: #88C0D0;
+    color: #2E3440;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+#dialog button:hover {
+    background-color: #81A1C1;
+}
+
+#dialog label {
+    color: #D8DEE9;
+}
+
+
+
