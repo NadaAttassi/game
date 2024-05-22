@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+    <requires lib="gtk+" version="3.24"/>
+    <object class="GtkWindow" id="window">
+        <property name="can_focus">False</property>
+        <property name="title" translatable="yes">Character Selection</property>
+        <property name="default_width">600</property>
+        <property name="default_height">400</property>
+        <signal name="destroy" handler="on_window_destroy" swapped="no"/>
+        <child>
+            <object class="GtkGrid" id="grid">
+                <property name="visible">True</property>
+                <property name="row_homogeneous">True</property>
+                <property name="column_homogeneous">True</property>
+                <child>
+                    <object class="GtkGrid" id="character1_card">
+                        <property name="visible">True</property>
+                        <property name="margin">10</property>
+                        <child>
+                            <object class="GtkImage" id="character1_image">
+                                <property name="visible">True</property>
+                                <property name="file">E:\ILISI_s1\GTK\Gladiator\resourses\1_knight_.png</property>
+                                <!-- Replace "path/to/character1_image.png" with the actual file path of your character image -->
+                                <property name="icon_size">3</property>
+                            </object>
+                            <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                            </packing>
+                        </child>
+                        <child>
+                            <object class="GtkLabel" id="character1_info">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Character 1 Info</property>
+                            </object>
+                            <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">1</property>
+                            </packing>
+                        </child>
+                    </object>
+                    <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                    </packing>
+                </child>
+                <child>
+                    <object class="GtkGrid" id="character2_card">
+                        <property name="visible">True</property>
+                        <property name="margin">10</property>
+                        <child>
+                            <object class="GtkImage" id="character2_image">
+                                <property name="visible">True</property>
+                                <property name="file">E:\ILISI_s1\GTK\Gladiator\resourses\2_knight_.png</property>
+                                <property name="icon_size">3</property>
+                            </object>
+                            <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                            </packing>
+                        </child>
+                        <child>
+                            <object class="GtkLabel" id="character2_info">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Character 2 Info</property>
+                            </object>
+                            <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">1</property>
+                            </packing>
+                        </child>
+                    </object>
+                    <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">0</property>
+                    </packing>
+                </child>
+                <child>
+                    <object class="GtkGrid" id="character3_card">
+                        <property name="visible">True</property>
+                        <property name="margin">10</property>
+                        <child>
+                            <object class="GtkImage" id="character3_image">
+                                <property name="visible">True</property>
+                                <property name="file">E:\ILISI_s1\GTK\Gladiator\resourses\3_knight_.png</property>
+                                <property name="icon_size">3</property>
+                            </object>
+                            <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                            </packing>
+                        </child>
+                        <child>
+                            <object class="GtkLabel" id="character3_info">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Character 3 Info</property>
+                            </object>
+                            <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">2</property>
+                            </packing>
+                        </child>
+                    </object>
+                    <packing>
+                        <property name="left_attach">2</property>
+                        <property name="top_attach">0</property>
+                    </packing>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>
