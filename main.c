@@ -26,7 +26,7 @@
 #define NUM_JUMPING_FRAMES 8
 #define NUM_HURTING_FRAMES 3
 #define NUM_DYING_FRAMES 6
-
+//PARTIE KHALID***************************************************************
 GtkImage *gladiator_image;
 GdkPixbuf *sprite_sheet;
 int current_frame = 0;
@@ -44,6 +44,7 @@ GtkWidget *table_time_image;
 GtkWidget *button_start;
 GtkWidget *button_create;
 GtkWidget *button_exit;
+GtkWidget *button_help;
 
 
 
@@ -126,6 +127,9 @@ void on_images_start_button_click(GtkWidget *button, gpointer data) {
 }
 
 
+
+//************************************************PARTIE IMANE***********************************************************
+//ARENA THEME**************************
 // Fonction principale
 void create_images_window() {
 
@@ -133,7 +137,7 @@ void create_images_window() {
     gint screen_width = gdk_screen_get_width(screen);
     gint screen_height = gdk_screen_get_height(screen);
 
-    // Utilisez une taille légèrement inférieure à celle de l'écran pour la fenêtre
+    // Utilisez une taille lÃ©gÃ¨rement infÃ©rieure Ã  celle de l'Ã©cran pour la fenÃªtre
     gint window_width = screen_width ;
     gint window_height = screen_height ;
 
@@ -148,15 +152,15 @@ void create_images_window() {
     GdkPixbuf *bg_pixbuf = gdk_pixbuf_new_from_file("bggg1.png", NULL);
     GdkPixbuf *resized_t_pixbuf = gdk_pixbuf_scale_simple(bg_pixbuf, window_width, window_height, GDK_INTERP_BILINEAR);
     GtkWidget *t_image = gtk_image_new_from_pixbuf(resized_t_pixbuf);
-    g_object_unref(bg_pixbuf); // Libère la mémoire du pixbuf original
+    g_object_unref(bg_pixbuf); // LibÃ¨re la mÃ©moire du pixbuf original
     gtk_fixed_put(GTK_FIXED(fixed), background_image, 0, 0);
 
     // Load and resize table image
     GdkPixbuf *table_pixbuf = gdk_pixbuf_new_from_file("table4.png", NULL);
     GdkPixbuf *resized_table_pixbuf = gdk_pixbuf_scale_simple(table_pixbuf, 870, 600, GDK_INTERP_BILINEAR);
     GtkWidget *table_image = gtk_image_new_from_pixbuf(resized_table_pixbuf);
-    g_object_unref(table_pixbuf); // Libère la mémoire du pixbuf original
-    gtk_fixed_put(GTK_FIXED(fixed), table_image, window_width * 0.05, window_height * 0.05); // Ajustez la position si nécessaire
+    g_object_unref(table_pixbuf); // LibÃ¨re la mÃ©moire du pixbuf original
+    gtk_fixed_put(GTK_FIXED(fixed), table_image, window_width * 0.05, window_height * 0.05); // Ajustez la position si nÃ©cessaire
 
     // Ajoutez les quatre images au conteneur fixe
     add_image(fixed, 1, "arena7.png", GTK_ICON_SIZE_BUTTON, 100, 100, window_width * 0.2, window_height * 0.2);
@@ -198,239 +202,248 @@ void create_images_window() {
     show_window(images_window);
 }
 
+
+
 // Callback for the start button in the images window
 void on_images_start_button_clickedd(GtkWidget *button_label, gpointer data) {
-    // Add the logic you want to execute when the start button in the images window is clicked
-     if(player) selected_player=player;
-    if (selected_player) {
-        g_print("Starting the game with %s\n", selected_player->name);
-        run_game(selected_player); // Appelez run_game avec le joueur sélectionné
-    } else {
-        g_print("No player selected!\n");
+        // Add the logic you want to execute when the start button in the images window is clicked
+         if(player) selected_player=player;
+        if (selected_player) {
+            g_print("Starting the game with %s\n", selected_player->name);
+            run_game(selected_player); // Appelez run_game avec le joueur sÃ©lectionnÃ©
+        } else {
+            g_print("No player selected!\n");
 
 
-    }
+        }
 }
 // Function to create a fixed container
 GtkWidget *create_fixed() {
-    return GTK_WIDGET(gtk_fixed_new());
+     return GTK_WIDGET(gtk_fixed_new());
 }
 
 // Function to update the background image
 void update_background_image(GtkWidget *fixed, GtkWidget **background_image, const char *file_path) {
-    if (*background_image) {
-        gtk_widget_destroy(*background_image);
-    }
-    *background_image = gtk_image_new_from_file(file_path);
-    gtk_fixed_put(GTK_FIXED(fixed), *background_image, 0, 0);
-    gtk_widget_show(*background_image);
+        if (*background_image) {
+            gtk_widget_destroy(*background_image);
+        }
+        *background_image = gtk_image_new_from_file(file_path);
+        gtk_fixed_put(GTK_FIXED(fixed), *background_image, 0, 0);
+        gtk_widget_show(*background_image);
 }
-// Fonction de vérification des attributs du joueur avant de créer la fenêtre des images
+//FIN PARTIE IMANE
+
+
+//PARTIE NADA****************
+//********************************************CREATION DE PERSONNAGE*******************************************//
+// Fonction de vÃ©rification des attributs du joueur avant de crÃ©er la fenÃªtre des images
 void check_player_attributes(GtkWidget *button, gpointer data) {
-    // Vérifiez si le joueur a été initialisé et que ses attributs sont > 0
-    if (player == NULL || player->PV == 0 || player->Attack == 0 || player->Defense == 0 || player->speed == 0) {
-        // Afficher une boîte de dialogue pour informer l'utilisateur
-        GtkWidget *dialog = gtk_message_dialog_new(NULL,
-                                                    GTK_DIALOG_MODAL,
-                                                    GTK_MESSAGE_ERROR,
-                                                    GTK_BUTTONS_OK,
-                                                    "Les attributs du joueur doivent etre superieurs a zero !");
-                                                    // Définir la position de la boîte de dialogue au centre de l'écran
-        gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+        // VÃ©rifiez si le joueur a Ã©tÃ© initialisÃ© et que ses attributs sont > 0
+        if (player == NULL || player->PV == 0 || player->Attack == 0 || player->Defense == 0 || player->speed == 0) {
+            // Afficher une boÃ®te de dialogue pour informer l'utilisateur
+            GtkWidget *dialog = gtk_message_dialog_new(NULL,
+                                                        GTK_DIALOG_MODAL,
+                                                        GTK_MESSAGE_ERROR,
+                                                        GTK_BUTTONS_OK,
+                                                        "Les attributs du joueur doivent etre superieurs a zero !");
+                                                        // DÃ©finir la position de la boÃ®te de dialogue au centre de l'Ã©cran
+            gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 
-        gtk_dialog_run(GTK_DIALOG(dialog));
-        gtk_widget_destroy(dialog);
-        return; // Arrêter l'exécution de la fonction si les attributs ne sont pas valides
-    }
+            gtk_dialog_run(GTK_DIALOG(dialog));
+            gtk_widget_destroy(dialog);
+            return; // ArrÃªter l'exÃ©cution de la fonction si les attributs ne sont pas valides
+        }
 
-    // Si les attributs sont valides, appelez la fonction create_images_window
-    create_images_window();
+        // Si les attributs sont valides, appelez la fonction create_images_window
+        create_images_window();
 }
 
+/*Fonction de creation d un personnage */
+/*fenetre de creartion de personnage*/
 //Creation de perso
 void ok_button_clicked_create(GtkWidget *widget, gpointer data) {
-    CallbackData *callback_data = (CallbackData *)data;
-    GtkWidget *entry = callback_data->entry;
-    Window *myWindow = callback_data->window;
+            CallbackData *callback_data = (CallbackData *)data;
+            GtkWidget *entry = callback_data->entry;
+            Window *myWindow = callback_data->window;
 
-    const gchar *text = gtk_entry_get_text(GTK_ENTRY(entry));
-    printf("Texte de l'entrée : %s\n", text);
-
-
-
-// Ensure player is allocated
-    if (player == NULL) {
-        player = (Player *)malloc(sizeof(Player));
-        if (player == NULL) {
-            fprintf(stderr, "\nFailed to allocate memory for player");
-            exit(1);
-        }
-        player->name = NULL;
-        player->PV = 0;
-        player->Attack = 0;
-        player->Defense = 0;
-        player->speed = 0;
-    }
-
-    // Free the existing name if necessary
-    if (player->name != NULL) {
-        free(player->name);
-    }
-
-    // Duplicate the entry text
-    player->name = strdup(text);
-    if (player->name == NULL) {
-        fprintf(stderr, "\nFailed to allocate memory for player name");
-        exit(1);
-    }
-
-
-    GdkScreen *screen = gdk_screen_get_default();
-    gint screen_width = gdk_screen_get_width(screen);
-    gint screen_height = gdk_screen_get_height(screen);
-
-    gchar* title = "Nouvelle fenêtre";
-    gchar* icon = NULL;
-    gint width = screen_width;
-    gint height = screen_height;
-    gint position = 1;
-    gint x = 0;
-    gint y = 0;
-    gint resizable = 1;
-
-    Window* myNewWindow = initializeWindow("f2", title, icon, height, width, position, x, y, resizable, NULL, "nada/temple.jpg", screen_width, screen_height);
-    createWindow(myNewWindow);
-    gtk_window_set_position(GTK_WINDOW(myNewWindow->window), GTK_WIN_POS_CENTER);
-    //gtk_window_set_modal(GTK_WINDOW(myNewWindow->window), TRUE);
-
-    Grille* myGrid = init_Grille("maGrille", width, height, 5, 0, NULL, 0, 0);
-    create_Grille(myGrid);
-    gtk_container_add(GTK_CONTAINER(myNewWindow->window), myGrid->Grille);
-
-    LabelObj* titre = init_label("CREATE YOUR Player", "lbl", 0, 1, 0, 0, 0, 0);
-    create_label22(titre);
-    ajout_au_Grille(myGrid->Grille, titre->label, 0, 0);
-
-    Box *left_box = initializeBox("left-box", 'v', 1, 0, "#FAFAD2", 0.7);
-    createBox(left_box);
-    gtk_widget_set_size_request(left_box->box, 200, 600);
-    ajout_au_Grille(myGrid->Grille, left_box->box, 0, 1);
-
-    LabelObj* myLabel = init_label(text, "nom", FALSE, FALSE, 100, 20, 0, 12);
-    create_label22(myLabel);
-
-    GtkWidget *edit_name_button = gtk_button_new_with_label("Modifier le nom");
-    noms = g_malloc(sizeof(Noms));
-    noms->ancienNom = g_strdup(text);
-    g_signal_connect(edit_name_button, "clicked", G_CALLBACK(modifier), myLabel->label);
-
-    LabelObj* label_Defense = init_label("Defense", "lelabel", FALSE, FALSE, 100, 20, 0, 12);
-    create_label22(label_Defense);
-    LabelObj* label_Attack = init_label("Attaque", "lelabel", FALSE, FALSE, 100, 20, 0, 12);
-    create_label22(label_Attack);
-    LabelObj* label_PV = init_label("Vitalite", "lelabel", FALSE, FALSE, 100, 20, 0, 12);
-    create_label22(label_PV);
-    LabelObj* label_speed = init_label("Vitesse", "lelabel", FALSE, FALSE, 100, 20, 0, 12);
-    create_label22(label_speed);
-
-    PlayerOptions options;
-    options.remaining_points = TOTAL_POINTS;
-    options.remaining_points_label = gtk_label_new("Remaining Points: 100");
-    gtk_widget_set_name(GTK_WIDGET(options.remaining_points_label), "remaining-points-label");
-
-    addToBox(left_box->box, options.remaining_points_label, 0, 1, 1, 1);
-    options.sliders[0] = create_slider(&options);
-    options.sliders[1] = create_slider(&options);
-    options.sliders[2] = create_slider(&options);
-    options.sliders[3] = create_slider(&options);
-
-    addToBox(left_box->box, options.sliders[0], 0, FALSE, FALSE, FALSE);
-    addToBox(left_box->box, label_Defense->label, 0, FALSE, FALSE, FALSE);
-    addToBox(left_box->box, options.sliders[1], 0, 1, 1, 1);
-    addToBox(left_box->box, label_Attack->label, 0, FALSE, FALSE, FALSE);
-    addToBox(left_box->box, options.sliders[2], 0, 1, 1, 1);
-    addToBox(left_box->box, label_PV->label, 0, FALSE, FALSE, FALSE);
-    addToBox(left_box->box, options.sliders[3], 0, 1, 1, 1);
-    addToBox(left_box->box, label_speed->label, 0, FALSE, FALSE, FALSE);
+            const gchar *text = gtk_entry_get_text(GTK_ENTRY(entry));
+            printf("Texte de l'entrÃ©e : %s\n", text);
 
 
 
-    GtkWidget *edit_name_button1 = gtk_button_new_with_label("Edit Name Character");
-    g_signal_connect(edit_name_button1, "clicked", G_CALLBACK(modifier), myLabel->label);
+        // Ensure player is allocated
+            if (player == NULL) {
+                player = (Player *)malloc(sizeof(Player));
+                if (player == NULL) {
+                    fprintf(stderr, "\nFailed to allocate memory for player");
+                    exit(1);
+                }
+                player->name = NULL;
+                player->PV = 0;
+                player->Attack = 0;
+                player->Defense = 0;
+                player->speed = 0;
+            }
 
-    addToBox(left_box->box, edit_name_button1, 0, FALSE, FALSE, 0);
-    addToBox(left_box->box, myLabel->label, 0, 1, 1, 1);
+            // Free the existing name if necessary
+            if (player->name != NULL) {
+                free(player->name);
+            }
 
-
-         // Create the photo area and add it to the grid
-        photo_area= initializeBox("photo-area", 'v', 1, 0, "", 0.7);
-
-        createBox(photo_area);
-        gtk_widget_set_size_request(photo_area->box, 400, 600);
-        const gchar *photo_path = "nada/knight.png"; // Replace with the path to your default photo
-        current_photo_widget = create_or_update_photo_widget(photo_path);
-         addToBox(photo_area->box, current_photo_widget, 0, 1, 1, 1);
-        //ajout_au_Grille(myGrid->Grille, photo_area->box, 2, 1);
-
-
-         Player players[] = {
-        {1, "knight", "nada/knight.png", NULL, 0, 0, 0, 0, NULL},
-        {2, "Lightning mage", "nada/mage.png", NULL, 0, 0, 0, 0, NULL},
-        {3, "samurai", "nada/samurai.png", NULL, 0, 0, 0, 0, NULL},
-        {4, "commander", "nada/commander.png", NULL, 0, 0, 0, 0, NULL},
-        {5, "magician", "nada/magician.png", NULL, 0, 0, 0, 0, NULL},
-        {6, "knight2", "nada/knight2.png", NULL, 0, 0, 0, 0, NULL}
-    };
-               // Create the Player thumbnails and add them to the grid
-        GtkWidget *thumbnails_container = create_Player_thumbnails(players, 6);
-        gtk_widget_set_name(thumbnails_container, "thumbnails-container");
-
-        // Attach thumbnails_container to the grid
-       // gtk_grid_attach(GTK_GRID(container), thumbnails_container, 1, 0, 1, 1); // position (1,0), spanning 1 cell
-
-       // ajout_au_Grille(myGrid->Grille, thumbnails_container, 5, 1);
-
-        // Création d'un bouton simple
-       ButtonSimple* play_btn = init_button_simple("start", "Play",NULL, 10,10, "arial", "black","", FALSE, TRUE, 1000, 190);
-       creer_button_Simple(play_btn);
-      // ajout_au_Grille(myGrid->Grille,simpleButton->button,simpleButton->x,simpleButton->y);
-
-       // Création du conteneur grid
-    GtkWidget *container = gtk_grid_new();
-     gtk_widget_set_name(container, "container");
-    // Ajout de photo_area au conteneur grid
-    gtk_grid_attach(GTK_GRID(container), photo_area->box, 0, 0, 1, 1); // position (0,0), spanning 1 cell
-
-    // Ajout des vignettes des joueurs au conteneur grid
-    gtk_grid_attach(GTK_GRID(container), thumbnails_container, 1, 0, 1, 1); // position (1,0), spanning 1 cell
-
-    // Ajout du bouton au conteneur grid
-    gtk_grid_attach(GTK_GRID(container), play_btn->button, 1, 1, 1, 1); // position (1,1), spanning 1 cell
-
-    // Ajout du conteneur grid à la grille
-    ajout_au_Grille(myGrid->Grille, container, 2, 1);
-
-// Assurez-vous de libérer la mémoire si nécessaire
+            // Duplicate the entry text
+            player->name = strdup(text);
+            if (player->name == NULL) {
+                fprintf(stderr, "\nFailed to allocate memory for player name");
+                exit(1);
+            }
 
 
-    //    g_signal_connect(simpleButton->button, "clicked", G_CALLBACK(ok_button_clicked), callback_data);
-            load_css2();
-    // Connectez d'abord le signal "clicked" du bouton à une fonction de vérification
-    g_signal_connect(play_btn->button, "clicked", G_CALLBACK(check_player_attributes), NULL);
+            GdkScreen *screen = gdk_screen_get_default();
+            gint screen_width = gdk_screen_get_width(screen);
+            gint screen_height = gdk_screen_get_height(screen);
+
+            gchar* title = "Nouvelle fenÃªtre";
+            gchar* icon = NULL;
+            gint width = screen_width;
+            gint height = screen_height;
+            gint position = 1;
+            gint x = 0;
+            gint y = 0;
+            gint resizable = 1;
+
+            Window* myNewWindow = initializeWindow("f2", title, icon, height, width, position, x, y, resizable, NULL, "nada/temple.jpg", screen_width, screen_height);
+            createWindow(myNewWindow);
+            gtk_window_set_position(GTK_WINDOW(myNewWindow->window), GTK_WIN_POS_CENTER);
+            //gtk_window_set_modal(GTK_WINDOW(myNewWindow->window), TRUE);
+
+            Grille* myGrid = init_Grille("maGrille", width, height, 5, 0, NULL, 0, 0);
+            create_Grille(myGrid);
+            gtk_container_add(GTK_CONTAINER(myNewWindow->window), myGrid->Grille);
+
+            LabelObj* titre = init_label("CREATE YOUR Player", "lbl", 0, 1, 0, 0, 0, 0);
+            create_label22(titre);
+            ajout_au_Grille(myGrid->Grille, titre->label, 0, 0);
+
+            Box *left_box = initializeBox("left-box", 'v', 1, 0, "#FAFAD2", 0.7);
+            createBox(left_box);
+            gtk_widget_set_size_request(left_box->box, 200, 600);
+            ajout_au_Grille(myGrid->Grille, left_box->box, 0, 1);
+
+            LabelObj* myLabel = init_label(text, "nom", FALSE, FALSE, 100, 20, 0, 12);
+            create_label22(myLabel);
+
+            GtkWidget *edit_name_button = gtk_button_new_with_label("Modifier le nom");
+            noms = g_malloc(sizeof(Noms));
+            noms->ancienNom = g_strdup(text);
+            g_signal_connect(edit_name_button, "clicked", G_CALLBACK(modifier), myLabel->label);
+
+            LabelObj* label_Defense = init_label("Defense", "lelabel", FALSE, FALSE, 100, 20, 0, 12);
+            create_label22(label_Defense);
+            LabelObj* label_Attack = init_label("Attaque", "lelabel", FALSE, FALSE, 100, 20, 0, 12);
+            create_label22(label_Attack);
+            LabelObj* label_PV = init_label("Vitalite", "lelabel", FALSE, FALSE, 100, 20, 0, 12);
+            create_label22(label_PV);
+            LabelObj* label_speed = init_label("Vitesse", "lelabel", FALSE, FALSE, 100, 20, 0, 12);
+            create_label22(label_speed);
+
+            PlayerOptions options;
+            options.remaining_points = TOTAL_POINTS;
+            options.remaining_points_label = gtk_label_new("Remaining Points: 100");
+            gtk_widget_set_name(GTK_WIDGET(options.remaining_points_label), "remaining-points-label");
+
+            addToBox(left_box->box, options.remaining_points_label, 0, 1, 1, 1);
+            options.sliders[0] = create_slider(&options);
+            options.sliders[1] = create_slider(&options);
+            options.sliders[2] = create_slider(&options);
+            options.sliders[3] = create_slider(&options);
+
+            addToBox(left_box->box, options.sliders[0], 0, FALSE, FALSE, FALSE);
+            addToBox(left_box->box, label_Defense->label, 0, FALSE, FALSE, FALSE);
+            addToBox(left_box->box, options.sliders[1], 0, 1, 1, 1);
+            addToBox(left_box->box, label_Attack->label, 0, FALSE, FALSE, FALSE);
+            addToBox(left_box->box, options.sliders[2], 0, 1, 1, 1);
+            addToBox(left_box->box, label_PV->label, 0, FALSE, FALSE, FALSE);
+            addToBox(left_box->box, options.sliders[3], 0, 1, 1, 1);
+            addToBox(left_box->box, label_speed->label, 0, FALSE, FALSE, FALSE);
 
 
-    // Show the new window
-    gtk_widget_show_all(myNewWindow->window);
 
-    gtk_widget_destroy(myWindow->window);
+            GtkWidget *edit_name_button1 = gtk_button_new_with_label("Edit Name Character");
+            g_signal_connect(edit_name_button1, "clicked", G_CALLBACK(modifier), myLabel->label);
 
-    // Start a new GTK main loop for the new window
-    gtk_main();
+            addToBox(left_box->box, edit_name_button1, 0, FALSE, FALSE, 0);
+            addToBox(left_box->box, myLabel->label, 0, 1, 1, 1);
+
+
+                 // Create the photo area and add it to the grid
+                photo_area= initializeBox("photo-area", 'v', 1, 0, "", 0.7);
+
+                createBox(photo_area);
+                gtk_widget_set_size_request(photo_area->box, 400, 600);
+                const gchar *photo_path = "nada/knight.png"; // Replace with the path to your default photo
+                current_photo_widget = create_or_update_photo_widget(photo_path);
+                 addToBox(photo_area->box, current_photo_widget, 0, 1, 1, 1);
+                //ajout_au_Grille(myGrid->Grille, photo_area->box, 2, 1);
+
+
+                 Player players[] = {
+                {1, "knight", "nada/knight.png", NULL, 0, 0, 0, 0, NULL},
+                {2, "Lightning mage", "nada/mage.png", NULL, 0, 0, 0, 0, NULL},
+                {3, "samurai", "nada/samurai.png", NULL, 0, 0, 0, 0, NULL},
+                {4, "commander", "nada/commander.png", NULL, 0, 0, 0, 0, NULL},
+                {5, "magician", "nada/magician.png", NULL, 0, 0, 0, 0, NULL},
+                {6, "knight2", "nada/knight2.png", NULL, 0, 0, 0, 0, NULL}
+            };
+                       // Create the Player thumbnails and add them to the grid
+                GtkWidget *thumbnails_container = create_Player_thumbnails(players, 6);
+                gtk_widget_set_name(thumbnails_container, "thumbnails-container");
+
+                // Attach thumbnails_container to the grid
+               // gtk_grid_attach(GTK_GRID(container), thumbnails_container, 1, 0, 1, 1); // position (1,0), spanning 1 cell
+
+               // ajout_au_Grille(myGrid->Grille, thumbnails_container, 5, 1);
+
+                // CrÃ©ation d'un bouton simple
+               ButtonSimple* play_btn = init_button_simple("start", "Play",NULL, 10,10, "arial", "black","", FALSE, TRUE, 1000, 190);
+               creer_button_Simple(play_btn);
+              // ajout_au_Grille(myGrid->Grille,simpleButton->button,simpleButton->x,simpleButton->y);
+
+               // CrÃ©ation du conteneur grid
+            GtkWidget *container = gtk_grid_new();
+             gtk_widget_set_name(container, "container");
+            // Ajout de photo_area au conteneur grid
+            gtk_grid_attach(GTK_GRID(container), photo_area->box, 0, 0, 1, 1); // position (0,0), spanning 1 cell
+
+            // Ajout des vignettes des joueurs au conteneur grid
+            gtk_grid_attach(GTK_GRID(container), thumbnails_container, 1, 0, 1, 1); // position (1,0), spanning 1 cell
+
+            // Ajout du bouton au conteneur grid
+            gtk_grid_attach(GTK_GRID(container), play_btn->button, 1, 1, 1, 1); // position (1,1), spanning 1 cell
+
+            // Ajout du conteneur grid Ã  la grille
+            ajout_au_Grille(myGrid->Grille, container, 2, 1);
+
+        // Assurez-vous de libÃ©rer la mÃ©moire si nÃ©cessaire
+
+
+            //    g_signal_connect(simpleButton->button, "clicked", G_CALLBACK(ok_button_clicked), callback_data);
+                    load_css2();
+            // Connectez d'abord le signal "clicked" du bouton Ã  une fonction de vÃ©rification
+            g_signal_connect(play_btn->button, "clicked", G_CALLBACK(check_player_attributes), NULL);
+
+
+            // Show the new window
+            gtk_widget_show_all(myNewWindow->window);
+
+            gtk_widget_destroy(myWindow->window);
+
+            // Start a new GTK main loop for the new window
+            gtk_main();
 }
-int create() {
+int create_charachter() {
 
 
-          // Création de la fenêtre principale
+          // CrÃ©ation de la fenÃªtre principale
         gchar* title = "Nom du personnage";
         gchar* icon = NULL;
         gint height = 200;
@@ -440,103 +453,108 @@ int create() {
         gint y = 0;
         gint resizable = 0; // Redimensionnable
 
-        // Initialisation de la fenêtre principale
+        // Initialisation de la fenÃªtre principale
         Window* myWindow = initializeWindow("f1",title, icon, height, width, position, x, y, resizable, NULL, "image.jpeg", 100, 100);
         createWindow(myWindow);
-        // Positionner la fenêtre au centre de l'écran
+        // Positionner la fenÃªtre au centre de l'Ã©cran
         gtk_window_set_position(GTK_WINDOW(myWindow->window), GTK_WIN_POS_CENTER);
 
-        // Laisser les icônes désactivées
+        // Laisser les icÃ´nes dÃ©sactivÃ©es
         gtk_window_set_icon(GTK_WINDOW(myWindow->window), NULL);
-        // Rendre la fenêtre modale
+        // Rendre la fenÃªtre modale
         gtk_window_set_modal(GTK_WINDOW(myWindow->window), TRUE);
 
         Grille* myGrid = init_Grille("maGrille", 400, 200, 5, 0, NULL, 100, 100);
                 create_Grille(myGrid);
-  gtk_container_add(GTK_CONTAINER(myWindow->window), myGrid->Grille);
- // Création du conteneur de défilement
-       // Scroll* sc = initializeScroll(myWindow->window, myGrid->Grille, 30, 0, 0); // Le premier argument est NULL car le conteneur parent sera défini plus tard
+        gtk_container_add(GTK_CONTAINER(myWindow->window), myGrid->Grille);
+        // CrÃ©ation du conteneur de dÃ©filement
+       // Scroll* sc = initializeScroll(myWindow->window, myGrid->Grille, 30, 0, 0); // Le premier argument est NULL car le conteneur parent sera dÃ©fini plus tard
         //createScroll(sc);
 
-        // Création et initialisation du label
-   // Création et initialisation du label
+        // CrÃ©ation et initialisation du label
+       // CrÃ©ation et initialisation du label
         LabelObj* myLabel = init_label("Veuillez choisir le nom du personnage", "mon_label", FALSE, FALSE, 100, 20, 0, 10);
         create_label22(myLabel);
 
         // Appliquer le style au label
         apply_label_style(myLabel->label);
 
-    ajout_au_Grille(myGrid->Grille,myLabel->label,myLabel->x,myLabel->y);
-    //image
+      ajout_au_Grille(myGrid->Grille,myLabel->label,myLabel->x,myLabel->y);
+        //image
 
-    imageObj* img=init_img("nada/golden.png",400,400);
-    create_image(img);
-   ajout_au_Grille(myGrid->Grille,img->image,0,0);
-    //ENTRY
+        imageObj* img=init_img("nada/golden.png",400,400);
+        create_image(img);
+       ajout_au_Grille(myGrid->Grille,img->image,0,0);
+        //ENTRY
 
-     EntryObj* entry= init_entry ("Nom du personnage...",NULL, 1,0,10,40,0,14);
-     create_entry(entry);
-     ajout_au_Grille(myGrid->Grille,entry->entry ,entry->x,entry->y);
-        // Chemin vers l'icône
-  // const gchar *icon_path = "icon.png";
-    CallbackData *callback_data = g_new(CallbackData, 1);
-    callback_data->entry = entry->entry;
-    callback_data->window = myWindow;
+         EntryObj* entry= init_entry ("Nom du personnage...",NULL, 1,0,10,40,0,14);
+         create_entry(entry);
+         ajout_au_Grille(myGrid->Grille,entry->entry ,entry->x,entry->y);
+            // Chemin vers l'icÃ´ne
+      // const gchar *icon_path = "icon.png";
+        CallbackData *callback_data = g_new(CallbackData, 1);
+        callback_data->entry = entry->entry;
+        callback_data->window = myWindow;
 
+        // CrÃ©ation d'un bouton simple
+       ButtonSimple* simpleButton = init_button_simple("mon_bouton", "OK",NULL, 10,10, "arial", "","white", FALSE, TRUE, 0, 190);
+       creer_button_Simple(simpleButton);
+      // ajout_au_Grille(myGrid->Grille,simpleButton->button,simpleButton->x,simpleButton->y);
 
-    // Création d'un bouton simple
-   ButtonSimple* simpleButton = init_button_simple("mon_bouton", "OK",NULL, 10,10, "arial", "","white", FALSE, TRUE, 0, 190);
-   creer_button_Simple(simpleButton);
-  // ajout_au_Grille(myGrid->Grille,simpleButton->button,simpleButton->x,simpleButton->y);
+       ajout_au_Grille(myGrid->Grille, simpleButton->button,simpleButton->x,simpleButton->y);
 
-   ajout_au_Grille(myGrid->Grille, simpleButton->button,simpleButton->x,simpleButton->y);
+        g_signal_connect(simpleButton->button, "clicked", G_CALLBACK(ok_button_clicked_create), callback_data);
 
-    g_signal_connect(simpleButton->button, "clicked", G_CALLBACK(ok_button_clicked_create), callback_data);
+           //*******************************
+        // Connexion de l'Ã©vÃ©nement de fermeture de la fenÃªtre principale
+        g_signal_connect(myWindow->window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
-       //*******************************
-    // Connexion de l'événement de fermeture de la fenêtre principale
-    g_signal_connect(myWindow->window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+        // Affichage de la fenÃªtre principale et dÃ©marrage de la boucle GTK
+        gtk_widget_show_all(myWindow->window);
+      //
+    // gtk_widget_show(myDialog->dialog);
 
-    // Affichage de la fenêtre principale et démarrage de la boucle GTK
-    gtk_widget_show_all(myWindow->window);
-  //
-// gtk_widget_show(myDialog->dialog);
+        gtk_main();
+     // LibÃ©ration de la mÃ©moire allouÃ©e
+        if (myWindow) {
+            g_free(myWindow->title);
+            g_free(myWindow->icon);
+            free(myWindow);
+        }
 
-    gtk_main();
- // Libération de la mémoire allouée
-    if (myWindow) {
-        g_free(myWindow->title);
-        g_free(myWindow->icon);
-        free(myWindow);
-    }
+        if (simpleButton) {
+            g_free(simpleButton->name);
+            g_free(simpleButton->label);
+            free(simpleButton);
+        }
 
-    if (simpleButton) {
-        g_free(simpleButton->name);
-        g_free(simpleButton->label);
-        free(simpleButton);
-    }
+             // LibÃ©ration de la mÃ©moire allouÃ©e pour le label
+        if (myLabel) {
+            if (myLabel->text)
+                g_free(myLabel->text);
+            if (myLabel->name)
+                g_free(myLabel->name);
+            free(myLabel);
+        }
+        if (myGrid) {
+            g_free(myGrid->name);
+            //if (myGrid->bgCLor.couleur)
+               // g_free(myGrid->bgCLor.couleur);
+            if (myGrid->imageBg.image)
+                g_free(myGrid->imageBg.image);
+            free(myGrid);
+        }
 
-         // Libération de la mémoire allouée pour le label
-    if (myLabel) {
-        if (myLabel->text)
-            g_free(myLabel->text);
-        if (myLabel->name)
-            g_free(myLabel->name);
-        free(myLabel);
-    }
-    if (myGrid) {
-        g_free(myGrid->name);
-        //if (myGrid->bgCLor.couleur)
-           // g_free(myGrid->bgCLor.couleur);
-        if (myGrid->imageBg.image)
-            g_free(myGrid->imageBg.image);
-        free(myGrid);
-    }
-
- return 0;
+     return 0;
 }
 
+//FIN PARTIE NADA**********************************************************************************************
+//************************************************************************************************++
 
+
+
+
+//PARTIE KHALID**************************************************************
 // Function to play sound
 void play_sound(const char *sound_file) {
     PlaySound(sound_file, NULL, SND_FILENAME | SND_ASYNC);
@@ -689,10 +707,10 @@ void run_game(Player *player) {
     //GtkWidget *window = create_window("Sprite Animation",arena_width,arena_height);
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-    // Définir le titre de la fenêtre
+    // DÃ©finir le titre de la fenÃªtre
     gtk_window_set_title(GTK_WINDOW(window), "Sprite Animation");
 
-    // Définir la taille par défaut de la fenêtre
+    // DÃ©finir la taille par dÃ©faut de la fenÃªtre
     gtk_window_set_default_size(GTK_WINDOW(window), arena_width, arena_height);
 
     // Connecter le signal "destroy" pour quitter l'application
@@ -770,25 +788,72 @@ void on_select_button_clicked(GtkWidget *button, gpointer data) {
     g_print("Selected player: %s\n", player->name);  // Print the selected player name for verification
 }
 
+void display_help_dialog() {
+    GtkWidget *dialog;
+    FILE *file;
+    char help_text[1000000];  // Assuming the help text won't exceed 1000 characters
+
+    // Open the help.txt file for reading
+    file = fopen("help.txt", "r");
+    if (file == NULL) {
+        g_print("Error opening file!\n");
+        return;
+    }
+    GtkWidget *scroll;
+     char buffer[100];
+    // Read the contents of the file into help_text
+    help_text[0] = '\0';
+
+    // Read the file line by line and append each line to help_text
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        // Concatenate the current line to help_text
+        strcat(help_text, buffer);
+    }
+
+    // Close the file
+    fclose(file);
+
+    // Create a dialog with the help text as its content
+    dialog = gtk_message_dialog_new(NULL,
+                                     GTK_DIALOG_MODAL,
+                                     GTK_MESSAGE_INFO,
+                                     GTK_BUTTONS_OK,
+                                     "%s",
+                                     help_text);
+
+    // Set the dialog title
+    gtk_window_set_title(GTK_WINDOW(dialog), "Help");
+
+    // Run the dialog
+    gtk_dialog_run(GTK_DIALOG(dialog));
+
+    // Destroy the dialog
+    gtk_widget_destroy(dialog);
+}
+
 void on_button_clicked(GtkWidget *button, gpointer data) {
     const char *button_label = gtk_button_get_label(GTK_BUTTON(button));
     if (g_strcmp0(button_label, "Start") == 0) {
         if (selected_player) {
             g_print("Starting the game with %s\n", selected_player->name);
             //run_game(selected_player);  // Call run_game with the selected player
-            create_images_window();
+            create_images_window(selected_player);
         } else {
             g_print("No player selected!\n");
         }
     } else if (g_strcmp0(button_label, "CREATE GLADIATOR") == 0) {
         g_print("Create Gladiator clicked\n");
-        create();
+          create_charachter();
+        // Code to create a new gladiator
     } else if (g_strcmp0(button_label, "EXIT") == 0) {
         g_print("Exit clicked\n");
         gtk_main_quit();
+    }  else if (g_strcmp0(button_label, "HELP") == 0) {
+        // Code to display help dialog
+        printf("ok a nada");
+        display_help_dialog();
     }
 }
-
 void play_audio(const char *file_path) {
     // Open the audio file
     if (PlaySound(file_path, NULL, SND_FILENAME | SND_ASYNC) == 0) {
@@ -804,10 +869,10 @@ int main(int argc, char *argv[]) {
     //GtkWidget *window = create_window("Character Selection", 800, 600);
      GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-    // Définir le titre de la fenêtre
+    // DÃ©finir le titre de la fenÃªtre
     gtk_window_set_title(GTK_WINDOW(window), "Character Selection");
 
-    // Définir la taille par défaut de la fenêtre
+    // DÃ©finir la taille par dÃ©faut de la fenÃªtre
     gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
 
     // Connecter le signal "destroy" pour quitter l'application
@@ -898,14 +963,18 @@ int main(int argc, char *argv[]) {
     button_start = create_button("Start", NULL);
     button_create = create_button("CREATE GLADIATOR", NULL);
     button_exit = create_button("EXIT", NULL);
+    button_help = create_button("HELP", NULL);
 
     gtk_fixed_put(GTK_FIXED(fixed), button_start, background_image_width - 350, background_image_height - 350);
     gtk_fixed_put(GTK_FIXED(fixed), button_create, background_image_width - 350, background_image_height - 275);
     gtk_fixed_put(GTK_FIXED(fixed), button_exit, background_image_width - 350, background_image_height - 200);
+    gtk_fixed_put(GTK_FIXED(fixed), button_help, background_image_width - 350, background_image_height - 100);
+
 
     g_signal_connect(button_start, "clicked", G_CALLBACK(on_button_clicked), NULL);
     g_signal_connect(button_create, "clicked", G_CALLBACK(on_button_clicked), NULL);
     g_signal_connect(button_exit, "clicked", G_CALLBACK(on_button_clicked), NULL);
+    g_signal_connect(button_help, "clicked", G_CALLBACK(on_button_clicked), NULL);
 
     GtkWidget *label = create_label("Select your Vector", "Ranger Eastwood 48", "black");
     gtk_fixed_put(GTK_FIXED(fixed), label, background_image_width / 7, background_image_height / 5);
